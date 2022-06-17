@@ -5,14 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        findViewById(R.id.buttonToActivity2).setOnClickListener((n) -> {
-            startActivity(new Intent(this, MainActivity2.class));
-        });
+        setContentView(R.layout.activity_main2);
+
     }
 }
