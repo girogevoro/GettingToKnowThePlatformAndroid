@@ -1,3 +1,20 @@
 <resources>
-    <string name="app_name">ForFirstLesson</string>
+    <string name="app_name">Calculate</string>
+    <string name="key_1">1</string>
+    <string name="key_2">2</string>
+    <string name="key_3">3</string>
+    <string name="key_4">4</string>
+    <string name="key_5">5</string>
+    <string name="key_6">6</string>
+    <string name="key_7">7</string>
+    <string name="key_8">8</string>
+    <string name="key_9">9</string>
+    <string name="key_0">0</string>
+    <string name="key_division">/</string>
+    <string name="key_multiplication">*</string>
+    <string name="key_add">+</string>
+    <string name="key_subtract">-</string>
+    <string name="key_sing">±</string>
+    <string name="key_dot">,</string>
+    <string name="key_equally">=</string>
 </resources>
