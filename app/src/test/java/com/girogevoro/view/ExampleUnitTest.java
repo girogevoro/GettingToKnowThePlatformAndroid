@@ -1,4 +1,4 @@
-package com.girogevoro.forfirstlesson;
+package com.girogevoro.view;
 
 import org.junit.Test;
 
