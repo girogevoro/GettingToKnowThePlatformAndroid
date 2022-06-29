@@ -12,5 +12,9 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <item name="digitalButtons">@style/button_calculator.digital</item>
+        <item name="operationButtons">@style/button_calculator.operation</item>
+        <item name="display">@style/display_calculator</item>
     </style>
 </resources>

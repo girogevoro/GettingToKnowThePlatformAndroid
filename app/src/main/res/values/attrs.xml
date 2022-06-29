@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="operationButtons" format="reference"/>
+    <attr name="digitalButtons" format="reference"/>
+    <attr name="display" format="reference"/>
+</resources>

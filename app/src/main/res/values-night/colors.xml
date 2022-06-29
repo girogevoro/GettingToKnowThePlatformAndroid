@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_digital_button">#2BAE4C</color>
+    <color name="color_operation_button">#086815</color>
+    <color name="color_display_calculation">#085312</color>
+</resources>

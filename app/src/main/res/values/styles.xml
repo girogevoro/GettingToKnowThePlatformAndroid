@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="button_calculator" parent="Widget.Material3.Button">
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:fontFamily">@font/custom_font</item>
+
+    </style>
+
+    <style name="button_calculator.digital">
+        <item name="android:backgroundTint">@color/color_digital_button</item>
+    </style>
+
+    <style name="button_calculator.operation">
+        <item name="android:backgroundTint">@color/color_operation_button</item>
+    </style>
+
+    <style name="display_calculator" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="android:background">@drawable/shape_display</item>
+        <item name="android:padding">@dimen/padding_display</item>
+    </style>
+</resources>
