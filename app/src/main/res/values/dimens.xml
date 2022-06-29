@@ -4,5 +4,9 @@
     <dimen name="button_horizontal_space">15dp</dimen>
     <dimen name="display_text_size">67sp</dimen>
     <dimen name="display_margin">36dp</dimen>
+    <dimen name="stroke_display">4dp</dimen>
+    <dimen name="radius_display">15dp</dimen>
+    <dimen name="padding_display">15dp</dimen>
+
     <integer name="max_digits">10</integer>
 </resources>
