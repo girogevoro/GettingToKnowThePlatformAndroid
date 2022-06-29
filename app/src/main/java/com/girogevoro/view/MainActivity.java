@@ -7,6 +7,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.girogevoro.model.CalculatorModel;
+import com.girogevoro.model.CalculatorOperations;
 import com.girogevoro.presenter.CalculatorPresenter;
 
 import java.text.DecimalFormat;
@@ -17,9 +19,11 @@ public class MainActivity extends AppCompatActivity implements CalculatorView {
 
     private static final String CALCULATOR_PRESENTER = "CalculatorPresenter";
     private CalculatorPresenter mCalculatorPresenter;
+    private CalculatorModel mCalculatorModel;
     private OnClickButtonListener mOnClickButtonListener;
     private TextView mDisplay;
     private DecimalFormat mDecimalFormat = new DecimalFormat("0.##########");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +31,9 @@ public class MainActivity extends AppCompatActivity implements CalculatorView {
         setContentView(R.layout.activity_main);
         mDisplay = findViewById(R.id.display_calculator);
 
-        mCalculatorPresenter = new CalculatorPresenter(this);
+
+        mCalculatorModel = new CalculatorOperations();
+        mCalculatorPresenter = new CalculatorPresenter(this, mCalculatorModel);
         setOnClickButtonListener(mCalculatorPresenter);
         initButtonListener();
 
@@ -48,6 +54,10 @@ public class MainActivity extends AppCompatActivity implements CalculatorView {
                 new PressedButton(
                         ((ButtonCalculator) map.get(view.getId())),
                         TypeButtonCalculator.OPERATION));
+        View.OnClickListener onClickSing = view -> mOnClickButtonListener.click(
+                new PressedButton(
+                        ((ButtonCalculator) map.get(view.getId())),
+                        TypeButtonCalculator.SING));
 
         View.OnClickListener onClickDot = view -> mOnClickButtonListener.click(
                 new PressedButton(
@@ -69,9 +79,9 @@ public class MainActivity extends AppCompatActivity implements CalculatorView {
         findViewById(R.id.key_multiplication).setOnClickListener(onClickOperation);
         findViewById(R.id.key_subtract).setOnClickListener(onClickOperation);
         findViewById(R.id.key_add).setOnClickListener(onClickOperation);
-        findViewById(R.id.key_sing).setOnClickListener(onClickOperation);
         findViewById(R.id.key_equally).setOnClickListener(onClickOperation);
 
+        findViewById(R.id.key_sing).setOnClickListener(onClickSing);
         findViewById(R.id.key_dot).setOnClickListener(onClickDot);
 
     }

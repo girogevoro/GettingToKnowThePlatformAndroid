@@ -17,5 +17,6 @@ public enum ButtonCalculator {
     KEY_MULTIPLICATION,
     KEY_ADD,
     KEY_SUBTRACT,
-    KEY_EQUAL
+    KEY_EQUAL,
+    NONE
 }
