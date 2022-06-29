@@ -12,12 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/display_margin"
-        android:background="@color/white"
         android:ems="@integer/max_digits"
         android:gravity="end"
         android:maxLength="@integer/max_digits"
         android:textSize="@dimen/display_text_size"
-        tools:text="0" />
+        tools:text="0"
+        style="?attr/display"/>
 
     <include
         layout="@layout/buttons"
