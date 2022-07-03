@@ -25,7 +25,7 @@ public class CalculatorPresenter implements OnClickButtonListener {
     private CalculatorView mCalculatorView;
     private CalculatorModel mCalculatorModel;
     private Map<ButtonCalculator, Integer> mapButtonsDigital = new HashMap<>();
-    private ButtonCalculator lastButton;
+    private ButtonCalculator lastButton = ButtonCalculator.NONE;
 
 
     public CalculatorPresenter(CalculatorView calculatorView, CalculatorModel calculatorModel) {
@@ -132,6 +132,7 @@ public class CalculatorPresenter implements OnClickButtonListener {
                     arg2 = -1 * arg1;
                     arg1 = 0;
                     isResultOnDisplay = false;
+                    lastOperation = ButtonCalculator.NONE;
                 } else {
                     arg2 *= -1;
                 }

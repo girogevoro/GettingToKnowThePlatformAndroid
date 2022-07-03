@@ -17,4 +17,10 @@
     <string name="key_sing">±</string>
     <string name="key_dot">,</string>
     <string name="key_equally">=</string>
+    <string name="key_theme">T</string>
+
+    <string name="theme_main">Main</string>
+    <string name="theme_One">One</string>
+    <string name="theme_Two">Two</string>
+    <string name="theme_three">Three</string>
 </resources>
