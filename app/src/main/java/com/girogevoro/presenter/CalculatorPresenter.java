@@ -25,6 +25,7 @@ public class CalculatorPresenter implements OnClickButtonListener {
     private CalculatorView mCalculatorView;
     private CalculatorModel mCalculatorModel;
     private Map<ButtonCalculator, Integer> mapButtonsDigital = new HashMap<>();
+    private ButtonCalculator lastButton;
 
 
     public CalculatorPresenter(CalculatorView calculatorView, CalculatorModel calculatorModel) {
@@ -42,6 +43,7 @@ public class CalculatorPresenter implements OnClickButtonListener {
             isDot = data.getIsDot();
             countAfterDot = data.getCountAfterDot();
             lastOperation = data.getLastOperation();
+            lastButton = data.getLastButton();
             isResultOnDisplay = data.getIsResultOnDisplay();
             if (isResultOnDisplay) {
                 mCalculatorView.showResult(arg1);
@@ -52,7 +54,7 @@ public class CalculatorPresenter implements OnClickButtonListener {
     }
 
     public CalculatorPresenter.Data getData() {
-        return new CalculatorPresenter.Data(arg1, arg2, isDot, countAfterDot, lastOperation, isResultOnDisplay);
+        return new CalculatorPresenter.Data(arg1, arg2, isDot, countAfterDot, lastOperation, isResultOnDisplay, lastButton);
     }
 
     private void initMapButtonsDigital() {
@@ -72,12 +74,17 @@ public class CalculatorPresenter implements OnClickButtonListener {
     public void click(PressedButton pressedButton) {
         switch (pressedButton.getTypeButton()) {
             case DIGITAL:
-                if (lastOperation != ButtonCalculator.NONE && arg2 != 0 && isResultOnDisplay) {
-                    arg2 = 0;
-                    lastOperation = ButtonCalculator.NONE;
+
+                if (lastButton == ButtonCalculator.KEY_EQUAL) {
+                    clear();
+
+                } else {
+                    if (lastOperation != ButtonCalculator.NONE && arg2 != 0 && isResultOnDisplay) {
+                        arg2 = 0;
+                        lastOperation = ButtonCalculator.NONE;
+                    }
                 }
 
-                isResultOnDisplay = false;
                 if (isDot) {
                     countAfterDot--;
                     arg2 = arg2 + Math.pow(10, countAfterDot) * (Integer) mapButtonsDigital.get(pressedButton.getButtonCalculator());
@@ -85,30 +92,34 @@ public class CalculatorPresenter implements OnClickButtonListener {
                     arg2 = arg2 * 10 + (Integer) mapButtonsDigital.get(pressedButton.getButtonCalculator());
                 }
                 mCalculatorView.showResult(arg2);
+                isResultOnDisplay = false;
+
                 break;
             case OPERATION:
-                switch (lastOperation) {
-                    case KEY_ADD:
-                        arg1 = mCalculatorModel.add(arg1, arg2);
-                        break;
-                    case KEY_SUBTRACT:
-                        arg1 = mCalculatorModel.sub(arg1, arg2);
-                        break;
-                    case KEY_MULTIPLICATION:
-                        arg1 = mCalculatorModel.mul(arg1, arg2);
-                        break;
-                    case KEY_DIVISION:
-                        arg1 = mCalculatorModel.div(arg1, arg2);
-                        break;
-                    case NONE:
-                        arg1 = arg2;
-                        break;
-                }
+                if (isLastButtonNotOperation()) {
+                    switch (lastOperation) {
+                        case KEY_ADD:
+                            arg1 = mCalculatorModel.add(arg1, arg2);
+                            break;
+                        case KEY_SUBTRACT:
+                            arg1 = mCalculatorModel.sub(arg1, arg2);
+                            break;
+                        case KEY_MULTIPLICATION:
+                            arg1 = mCalculatorModel.mul(arg1, arg2);
+                            break;
+                        case KEY_DIVISION:
+                            arg1 = mCalculatorModel.div(arg1, arg2);
+                            break;
+                        case NONE:
+                            arg1 = arg2;
+                            break;
+                    }
 
-                isDot = false;
-                countAfterDot = 0;
-                mCalculatorView.showResult(arg1);
-                isResultOnDisplay = true;
+                    isDot = false;
+                    countAfterDot = 0;
+                    mCalculatorView.showResult(arg1);
+                    isResultOnDisplay = true;
+                }
 
                 if (pressedButton.getButtonCalculator() != ButtonCalculator.KEY_EQUAL) {
                     arg2 = 0;
@@ -133,7 +144,21 @@ public class CalculatorPresenter implements OnClickButtonListener {
             default:
                 throw new IllegalStateException("Unexpected value: " + pressedButton.getTypeButton());
         }
+        lastButton = pressedButton.getButtonCalculator();
+    }
 
+    private boolean isLastButtonNotOperation() {
+        return !(lastButton == ButtonCalculator.KEY_DIVISION
+                || lastButton == ButtonCalculator.KEY_MULTIPLICATION
+                || lastButton == ButtonCalculator.KEY_SUBTRACT
+                || lastButton == ButtonCalculator.KEY_ADD);
+    }
+
+    private void clear() {
+        arg1 = 0;
+        arg2 = 0;
+        isDot = false;
+        lastOperation = ButtonCalculator.NONE;
     }
 
     public static class Data implements Parcelable {
@@ -144,14 +169,17 @@ public class CalculatorPresenter implements OnClickButtonListener {
         private final ButtonCalculator lastOperation;
 
         private final boolean isResultOnDisplay;
+        private ButtonCalculator lastButton;
 
-        public Data(double arg1, double arg2, boolean isDot, int countAfterDot, ButtonCalculator lastOperation, boolean isResultOnDisplay) {
+        public Data(double arg1, double arg2, boolean isDot, int countAfterDot, ButtonCalculator lastOperation,
+                    boolean isResultOnDisplay, ButtonCalculator lastButton) {
             this.arg1 = arg1;
             this.arg2 = arg2;
             this.isDot = isDot;
             this.countAfterDot = countAfterDot;
             this.lastOperation = lastOperation;
             this.isResultOnDisplay = isResultOnDisplay;
+            this.lastButton = lastButton;
         }
 
 
@@ -162,7 +190,7 @@ public class CalculatorPresenter implements OnClickButtonListener {
             countAfterDot = in.readInt();
             lastOperation = ButtonCalculator.values()[in.readInt()];
             isResultOnDisplay = in.readByte() != 0;
-            ;
+            lastButton = ButtonCalculator.values()[in.readInt()];
         }
 
         public static final Creator<Data> CREATOR = new Creator<Data>() {
@@ -214,6 +242,11 @@ public class CalculatorPresenter implements OnClickButtonListener {
             parcel.writeInt(countAfterDot);
             parcel.writeInt(lastOperation.ordinal());
             parcel.writeByte((byte) (isResultOnDisplay ? 1 : 0));
+            parcel.writeInt(lastButton.ordinal());
+        }
+
+        public ButtonCalculator getLastButton() {
+            return lastButton;
         }
     }
 }
