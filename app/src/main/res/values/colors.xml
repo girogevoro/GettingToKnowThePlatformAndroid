@@ -12,4 +12,19 @@
     <color name="color_operation_button">#066193</color>
     <color name="color_display_calculation">#3395B3</color>
 
+    <color name="color_digital_buttonV1">#AD65F4</color>
+    <color name="color_operation_buttonV1">#4A057C</color>
+    <color name="color_display_calculationV1">#4D2B7E</color>
+
+    <color name="color_digital_buttonV2">#3ADF1C</color>
+    <color name="color_operation_buttonV2">#1BBA22</color>
+    <color name="color_display_calculationV2">#38BA59</color>
+
+    <color name="color_operation_buttonV3">#AC7C04</color>
+    <color name="color_digital_buttonV3">#915E06</color>
+    <color name="color_display_calculationV3">#C89333</color>
+
+
+
+
 </resources>
