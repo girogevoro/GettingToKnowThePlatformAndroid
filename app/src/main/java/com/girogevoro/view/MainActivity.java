@@ -1,16 +1,26 @@
 package com.girogevoro.view;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.girogevoro.model.CalculatorModel;
 import com.girogevoro.model.CalculatorOperations;
 import com.girogevoro.presenter.CalculatorPresenter;
+import com.girogevoro.repository.Theme;
+import com.girogevoro.repository.ThemesRepositoryImpl;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +38,10 @@ public class MainActivity extends AppCompatActivity implements CalculatorView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Theme nowTheme = ThemesRepositoryImpl.getInstance(this).getNow();
+        setTheme(nowTheme.getIdTheme());
         setContentView(R.layout.activity_main);
+
         mDisplay = findViewById(R.id.display_calculator);
 
 
@@ -36,6 +49,33 @@ public class MainActivity extends AppCompatActivity implements CalculatorView {
         mCalculatorPresenter = new CalculatorPresenter(this, mCalculatorModel);
         setOnClickButtonListener(mCalculatorPresenter);
         initButtonListener();
+
+        initButtonTheme();
+
+
+    }
+
+    private void initButtonTheme() {
+
+        ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if(result.getResultCode()== Activity.RESULT_OK){
+                    Intent data = result.getData();
+                    Theme theme = (Theme) data.getSerializableExtra(SettingActivity.NEW_THEME);
+                    ThemesRepositoryImpl.getInstance(MainActivity.this).setNow(theme);
+                    recreate();
+                }
+            }
+        });
+
+        findViewById(R.id.key_theme).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                launcher.launch(intent);
+            }
+        });
 
 
     }

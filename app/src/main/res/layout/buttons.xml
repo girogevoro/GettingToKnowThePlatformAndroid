@@ -6,115 +6,115 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/key_1"
+        style="?attr/digitalButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/key_1"
-        style = "?attr/digitalButtons" />
+        android:text="@string/key_1" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/key_2"
+        style="?attr/digitalButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/key_2"
-        style = "?attr/digitalButtons" />
+        android:text="@string/key_2" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/key_3"
+        style="?attr/digitalButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/key_3"
-        style = "?attr/digitalButtons" />
+        android:text="@string/key_3" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/key_division"
+        style="?attr/operationButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/key_division"
-        style = "?attr/operationButtons" />
+        android:text="@string/key_division" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/key_4"
+        style="?attr/digitalButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/key_4"
-        style = "?attr/digitalButtons" />
+        android:text="@string/key_4" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/key_5"
+        style="?attr/digitalButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/key_5"
-        style = "?attr/digitalButtons" />
+        android:text="@string/key_5" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/key_6"
+        style="?attr/digitalButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/key_6"
-        style = "?attr/digitalButtons" />
+        android:text="@string/key_6" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/key_multiplication"
+        style="?attr/operationButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/key_multiplication"
-        style = "?attr/operationButtons" />
+        android:text="@string/key_multiplication" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/key_7"
+        style="?attr/digitalButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/key_7"
-        style = "?attr/digitalButtons" />
+        android:text="@string/key_7" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/key_8"
+        style="?attr/digitalButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/key_8"
-        style = "?attr/digitalButtons" />
+        android:text="@string/key_8" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/key_9"
+        style="?attr/digitalButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/key_9"
-        style = "?attr/digitalButtons" />
+        android:text="@string/key_9" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/key_subtract"
+        style="?attr/operationButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/key_subtract"
-        style = "?attr/operationButtons" />
+        android:text="@string/key_subtract" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/key_sing"
+        style="?attr/digitalButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/key_sing"
-        style = "?attr/digitalButtons" />
+        android:text="@string/key_sing" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/key_0"
+        style="?attr/digitalButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/key_0"
-        style = "?attr/digitalButtons" />
+        android:text="@string/key_0" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/key_dot"
+        style="?attr/digitalButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/key_dot"
-        style = "?attr/digitalButtons" />
+        android:text="@string/key_dot" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/key_add"
+        style="?attr/operationButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/key_add"
-        style = "?attr/operationButtons" />
+        android:text="@string/key_add" />
 
 
     <androidx.constraintlayout.helper.widget.Flow
@@ -158,11 +158,20 @@
         app:layout_constraintTop_toBottomOf="@id/flow3" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_theme"
+        style="?attr/operationButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/key_theme"
+        app:layout_constraintLeft_toLeftOf="@id/flow4"
+        app:layout_constraintTop_toBottomOf="@id/flow4" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/key_equally"
+        style="?attr/operationButtons"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/key_equally"
-        style = "?attr/operationButtons" />
+        android:text="@string/key_equally" />
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow5"
