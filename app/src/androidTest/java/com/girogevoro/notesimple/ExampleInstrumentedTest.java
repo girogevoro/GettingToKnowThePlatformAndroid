@@ -1,4 +1,4 @@
-package com.girogevoro.forfirstlesson;
+package com.girogevoro.notesimple;
 
 import android.content.Context;
 
