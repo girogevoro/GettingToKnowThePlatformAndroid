@@ -1,18 +1,17 @@
-package com.girogevoro.notesimple.data;
+package com.girogevoro.notesimple.repository;
 
-import android.graphics.Color;
 
-import java.sql.Time;
+import java.util.Date;
 
 public class Note {
     private String mName;
-    private Time mTime;
+    private Date mDate;
     private String mDescription;
-    private Color mColor;
+    private Integer mColor;
 
-    public Note(String name, Time time, String description, Color color) {
+    public Note(String name, Date date, String description, Integer color) {
         mName = name;
-        mTime = time;
+        mDate = date;
         mDescription = description;
         mColor = color;
     }
@@ -25,12 +24,12 @@ public class Note {
         mName = name;
     }
 
-    public Time getTime() {
-        return mTime;
+    public Date getDate() {
+        return mDate;
     }
 
-    public void setTime(Time time) {
-        mTime = time;
+    public void setDate(Date date) {
+        mDate = date;
     }
 
     public String getDescription() {
@@ -41,11 +40,11 @@ public class Note {
         mDescription = description;
     }
 
-    public Color getColor() {
+    public Integer getColor() {
         return mColor;
     }
 
-    public void setColor(Color color) {
+    public void setColor(Integer color) {
         mColor = color;
     }
 }
