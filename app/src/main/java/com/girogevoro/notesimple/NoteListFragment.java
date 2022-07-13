@@ -53,7 +53,7 @@ public class NoteListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initList((LinearLayout) view);
+        initList((LinearLayout) view.findViewById(R.id.list_notes));
     }
 
     private void initList(LinearLayout mainLayout) {
@@ -61,12 +61,14 @@ public class NoteListFragment extends Fragment {
         for (Note i : NoteRepositoryImpl.getInstance().getAll()) {
             TextView textView = new TextView(requireContext());
             textView.setText(i.getName());
-            textView.setPadding(15,15,15,15);
+            textView.setBackgroundColor(i.getColor());
+            textView.setPadding(15, 15, 15, 15);
             mainLayout.addView(textView);
-            final Integer indexNote = cnt++;
+
             textView.setOnClickListener(view -> {
-                ((INoteListFragment) requireActivity()).setNote(indexNote);
+                ((INoteListFragment) requireActivity()).setNote(i);
             });
         }
+
     }
 }
