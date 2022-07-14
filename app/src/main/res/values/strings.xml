@@ -5,4 +5,8 @@
     <string name="ok">Ok</string>
     <string name="add_note">+</string>
     <string name="remove_note">remove</string>
+    <string name="edit_note">edit</string>
+    <string name="title">Title</string>
+    <string name="date">Date</string>
+    <string name="description">Description</string>
 </resources>

@@ -6,17 +6,21 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.girogevoro.notesimple.repository.Note;
 import com.girogevoro.notesimple.repository.NoteRepositoryImpl;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -58,7 +62,13 @@ public class NoteInfoFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initNote(view);
 
+        FragmentManager childFragmentManager = getChildFragmentManager();
+        childFragmentManager.beginTransaction()
+                .replace(R.id.navigation, NavigateFragment.newInstance())
+                .commit();
+
     }
+
 
     private void initNote(@NonNull View view) {
         view.setBackgroundColor(mNote.getColor());

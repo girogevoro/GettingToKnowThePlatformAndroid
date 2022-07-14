@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.girogevoro.notesimple.repository.Note;
 import com.girogevoro.notesimple.repository.NoteRepositoryImpl;
@@ -54,6 +55,10 @@ public class NoteListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initList((LinearLayout) view.findViewById(R.id.list_notes));
+
+        view.findViewById(R.id.add_note).setOnClickListener(v->{
+            Toast.makeText(requireContext(),"add new note", Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void initList(LinearLayout mainLayout) {
