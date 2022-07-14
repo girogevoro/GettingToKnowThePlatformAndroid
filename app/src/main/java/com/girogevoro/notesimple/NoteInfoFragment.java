@@ -6,26 +6,28 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.girogevoro.notesimple.repository.Note;
 import com.girogevoro.notesimple.repository.NoteRepositoryImpl;
 
-import java.lang.reflect.GenericArrayType;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public class NoteInfoFragment extends Fragment {
 
-    private static final String INDEX = "index";
-    private int mIndex;
+    private static final String NOTE = "index";
     private Note mNote;
     private TextView mDate;
     private AlertDialog mAlertDialog;
@@ -33,10 +35,10 @@ public class NoteInfoFragment extends Fragment {
     public NoteInfoFragment() {
     }
 
-    public static NoteInfoFragment newInstance(Integer index) {
+    public static NoteInfoFragment newInstance(Note note) {
         NoteInfoFragment fragment = new NoteInfoFragment();
         Bundle args = new Bundle();
-        args.putInt(INDEX, index);
+        args.putParcelable(NOTE, note);
         fragment.setArguments(args);
         return fragment;
     }
@@ -45,7 +47,7 @@ public class NoteInfoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mIndex = getArguments().getInt(INDEX);
+            mNote = (Note) getArguments().getParcelable(NOTE);
         }
     }
 
@@ -60,14 +62,20 @@ public class NoteInfoFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initNote(view);
 
+        FragmentManager childFragmentManager = getChildFragmentManager();
+        childFragmentManager.beginTransaction()
+                .replace(R.id.navigation, NavigateFragment.newInstance())
+                .commit();
+
     }
 
+
     private void initNote(@NonNull View view) {
-        mNote = NoteRepositoryImpl.getInstance().get(mIndex);
         view.setBackgroundColor(mNote.getColor());
         ((TextView) view.findViewById(R.id.title)).setText(mNote.getName());
         mDate = view.findViewById(R.id.time);
         setData();
+
         mDate.setOnClickListener(v -> {
             mAlertDialog = new AlertDialog.Builder(requireActivity()).create();
 

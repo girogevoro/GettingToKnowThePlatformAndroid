@@ -1,14 +1,17 @@
 package com.girogevoro.notesimple;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.girogevoro.notesimple.repository.Note;
 import com.girogevoro.notesimple.repository.NoteRepositoryImpl;
 
+import java.net.BindException;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements INoteListFragment {
@@ -28,30 +31,28 @@ public class MainActivity extends AppCompatActivity implements INoteListFragment
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.list_container, NoteListFragment.newInstance(this))
-                .commit();
-    }
-
-    @Override
-    public void setNote(Integer index) {
-        if (isPortrait()) {
+        if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.list_container, NoteInfoFragment.newInstance(index))
-                    .addToBackStack("")
-                    .commit();
-        } else {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.list_info, NoteInfoFragment.newInstance(index))
+                    .replace(R.id.list_container, NoteListFragment.newInstance(this))
                     .commit();
         }
     }
 
-    private boolean isPortrait() {
-        return getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+    @Override
+    public void setNote(Note note) {
+        FragmentManager supportFragmentManager = getSupportFragmentManager();
+
+        if (supportFragmentManager.getBackStackEntryCount() > 0) {
+            int id = supportFragmentManager.getBackStackEntryAt(0).getId();
+            supportFragmentManager.popBackStack(id, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+
+        supportFragmentManager
+                .beginTransaction()
+                .addToBackStack("")
+                .replace(R.id.list_info, NoteInfoFragment.newInstance(note))
+                .commit();
     }
+
 }
