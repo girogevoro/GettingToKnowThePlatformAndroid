@@ -8,19 +8,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
-import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.girogevoro.notesimple.repository.Note;
-import com.girogevoro.notesimple.repository.NoteRepositoryImpl;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -49,6 +49,7 @@ public class NoteInfoFragment extends Fragment {
         if (getArguments() != null) {
             mNote = (Note) getArguments().getParcelable(NOTE);
         }
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -100,5 +101,28 @@ public class NoteInfoFragment extends Fragment {
         String dd_mm_yyyy = new SimpleDateFormat(getString(R.string.format_date),
                 Locale.getDefault()).format(mNote.getDate());
         mDate.setText(dd_mm_yyyy);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        menu.clear();
+        //super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.options_menu_info, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int itemId = item.getItemId();
+        if (itemId == R.id.send) {
+            Toast.makeText(requireContext(), "todo send", Toast.LENGTH_LONG).show();
+        } else if (itemId == R.id.add_link) {
+            Toast.makeText(requireContext(), "todo add link", Toast.LENGTH_SHORT).show();
+        } else if (itemId == R.id.add_photo) {
+            Toast.makeText(requireContext(), "todo add photo", Toast.LENGTH_SHORT).show();
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 }

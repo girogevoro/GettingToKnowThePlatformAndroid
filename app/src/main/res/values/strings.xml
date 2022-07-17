@@ -9,4 +9,10 @@
     <string name="title">Title</string>
     <string name="date">Date</string>
     <string name="description">Description</string>
+    <string name="menu_search">search</string>
+    <string name="menu_sort_by_time">sort by time</string>
+    <string name="menu_sort_by_name">sort by name</string>
+    <string name="menu_send">send</string>
+    <string name="menu_add_photo">add photo</string>
+    <string name="menu_add_link">add link</string>
 </resources>

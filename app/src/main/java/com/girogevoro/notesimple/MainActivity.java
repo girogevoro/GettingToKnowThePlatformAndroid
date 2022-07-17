@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 
 import com.girogevoro.notesimple.repository.Note;
 import com.girogevoro.notesimple.repository.NoteRepositoryImpl;
@@ -55,4 +56,10 @@ public class MainActivity extends AppCompatActivity implements INoteListFragment
                 .commit();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+      //  getMenuInflater().inflate(R.menu.options_menu_main, menu);
+        super.onCreateOptionsMenu(menu);
+        return true;
+    }
 }

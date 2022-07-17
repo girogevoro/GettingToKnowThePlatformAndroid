@@ -5,10 +5,12 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -43,6 +45,8 @@ public class NoteListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -56,8 +60,8 @@ public class NoteListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initList((LinearLayout) view.findViewById(R.id.list_notes));
 
-        view.findViewById(R.id.add_note).setOnClickListener(v->{
-            Toast.makeText(requireContext(),"add new note", Toast.LENGTH_SHORT).show();
+        view.findViewById(R.id.add_note).setOnClickListener(v -> {
+            Toast.makeText(requireContext(), "add new note", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -75,5 +79,28 @@ public class NoteListFragment extends Fragment {
             });
         }
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.options_menu_main, menu);
+        //super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int itemId = item.getItemId();
+        if (itemId == R.id.search) {
+            Toast.makeText(requireContext(), "todo send", Toast.LENGTH_SHORT).show();
+        } else if (itemId == R.id.sort_by_time) {
+            Toast.makeText(requireContext(), "todo add sort by time", Toast.LENGTH_SHORT).show();
+        } else if (itemId == R.id.sort_by_name) {
+            Toast.makeText(requireContext(), "todo sort by name", Toast.LENGTH_SHORT).show();
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 }
