@@ -1,11 +1,19 @@
 package com.girogevoro.notesimple;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.appcompat.widget.PopupMenu;
+
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,7 +67,7 @@ public class NoteListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initList((LinearLayout) view.findViewById(R.id.list_notes));
+        initList(view.findViewById(R.id.list_notes));
 
         view.findViewById(R.id.add_note).setOnClickListener(v -> {
             Toast.makeText(requireContext(), "add new note", Toast.LENGTH_SHORT).show();
@@ -77,15 +86,36 @@ public class NoteListFragment extends Fragment {
             textView.setOnClickListener(view -> {
                 ((INoteListFragment) requireActivity()).setNote(i);
             });
+            textView.setOnLongClickListener(view -> {
+                initPopupMenu(mainLayout, textView, i);
+                return true;
+            });
+
+
         }
 
+    }
+
+
+
+    void initPopupMenu(LinearLayout mainLayout, View view, Note note) {
+        PopupMenu popupMenu = new PopupMenu(requireActivity(), view);
+        requireActivity().getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(menuItem -> {
+            if (menuItem.getItemId() == R.id.remove_note) {
+                mainLayout.removeView(view);
+                NoteRepositoryImpl.getInstance().getAll().remove(note);
+                return true;
+            }
+            return false;
+        });
+        popupMenu.show();
     }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         menu.clear();
         inflater.inflate(R.menu.options_menu_main, menu);
-        //super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
