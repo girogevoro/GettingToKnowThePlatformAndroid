@@ -9,4 +9,14 @@
     <string name="title">Title</string>
     <string name="date">Date</string>
     <string name="description">Description</string>
+    <string name="menu_search">search</string>
+    <string name="menu_sort_by_time">sort by time</string>
+    <string name="menu_sort_by_name">sort by name</string>
+    <string name="menu_send">send</string>
+    <string name="menu_add_photo">add photo</string>
+    <string name="menu_add_link">add link</string>
+    <string name="about_application">about the app</string>
+    <string name="navigation_drawer_open">navigation drawer open</string>
+    <string name="navigation_drawer_close">navigation drawer close</string>
+    <string name="it_s_cool_the_app">it\'s cool the app</string>
 </resources>
