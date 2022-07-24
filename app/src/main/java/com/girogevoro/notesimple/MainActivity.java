@@ -2,10 +2,12 @@ package com.girogevoro.notesimple;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.girogevoro.notesimple.repository.Note;
@@ -21,6 +24,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.net.BindException;
 import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements INoteListFragment {
 
@@ -56,6 +60,12 @@ public class MainActivity extends AppCompatActivity implements INoteListFragment
                 .addToBackStack("")
                 .replace(R.id.list_info, NoteInfoFragment.newInstance(note))
                 .commit();
+    }
+
+    @Override
+    public void addNote(Note note) {
+         NoteRepositoryImpl.getInstance().add(note);
+         recreate();
     }
 
     private FragmentManager oneFrame() {
@@ -96,4 +106,24 @@ public class MainActivity extends AppCompatActivity implements INoteListFragment
         });
     }
 
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Exit")
+                    .setMessage("Do you want to exit the program")
+                    .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                            Toast.makeText(MainActivity.this, "exit", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton("no", null)
+                    .show();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }
