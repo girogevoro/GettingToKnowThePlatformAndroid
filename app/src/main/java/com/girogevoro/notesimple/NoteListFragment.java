@@ -13,6 +13,7 @@ import androidx.appcompat.widget.PopupMenu;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 
 
 import android.view.LayoutInflater;
@@ -35,7 +36,6 @@ import com.girogevoro.notesimple.repository.NoteRepositoryImpl;
  * create an instance of this fragment.
  */
 public class NoteListFragment extends Fragment {
-
 
     public NoteListFragment() {
         // Required empty public constructor
@@ -71,6 +71,8 @@ public class NoteListFragment extends Fragment {
 
         view.findViewById(R.id.add_note).setOnClickListener(v -> {
             Toast.makeText(requireContext(), "add new note", Toast.LENGTH_SHORT).show();
+            AddNoteDialogFragment addNoteDialogFragment = AddNoteDialogFragment.newInstance(requireActivity());
+            addNoteDialogFragment.show(getParentFragmentManager(), AddNoteDialogFragment.TAG);
         });
     }
 
@@ -95,7 +97,6 @@ public class NoteListFragment extends Fragment {
         }
 
     }
-
 
 
     void initPopupMenu(LinearLayout mainLayout, View view, Note note) {
