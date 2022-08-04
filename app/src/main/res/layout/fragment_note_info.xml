@@ -7,7 +7,7 @@
     android:focusable="true"
     android:orientation="vertical"
     android:padding="@dimen/padding_fragment_info"
-    tools:context=".NoteInfoFragment">
+    tools:context=".UI.fragment.NoteInfoFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

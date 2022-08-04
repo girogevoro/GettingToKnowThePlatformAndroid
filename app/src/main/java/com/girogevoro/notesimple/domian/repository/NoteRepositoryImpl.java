@@ -1,4 +1,4 @@
-package com.girogevoro.notesimple.repository;
+package com.girogevoro.notesimple.domian.repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,12 @@ public class NoteRepositoryImpl implements NoteRepository {
 
     @Override
     public void add(Note note) {
+//        for (int i = 0; i < mNoteList.size(); i++) {
+//            if (mNoteList.get(i).isEqual(note)) {
+//                mNoteList.set(i, note);
+//                return;
+//            }
+//        }
         mNoteList.add(note);
     }
 

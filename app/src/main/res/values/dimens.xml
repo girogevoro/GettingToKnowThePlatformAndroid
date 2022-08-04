@@ -2,5 +2,6 @@
 <resources>
     <dimen name="padding_fragment_info">15dp</dimen>
     <dimen name="sizeTextTitle">28sp</dimen>
-    <dimen name="margin_button">5dp</dimen>
+    <dimen name="margin_button">15dp</dimen>
+    <dimen name="divider">3dp</dimen>
 </resources>

@@ -1,4 +1,4 @@
-package com.girogevoro.notesimple;
+package com.girogevoro.notesimple.UI.fragment;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -18,7 +18,8 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.girogevoro.notesimple.repository.Note;
+import com.girogevoro.notesimple.R;
+import com.girogevoro.notesimple.domian.repository.Note;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -65,8 +66,10 @@ public class NoteInfoFragment extends Fragment {
 
         FragmentManager childFragmentManager = getChildFragmentManager();
         childFragmentManager.beginTransaction()
-                .replace(R.id.navigation, NavigateFragment.newInstance())
+                .replace(R.id.navigation, NavigateFragment.newInstance(mNote))
                 .commit();
+
+//        view.findViewById(R.id.)
 
     }
 
@@ -118,6 +121,8 @@ public class NoteInfoFragment extends Fragment {
             Toast.makeText(requireContext(), "todo send", Toast.LENGTH_LONG).show();
         } else if (itemId == R.id.add_link) {
             Toast.makeText(requireContext(), "todo add link", Toast.LENGTH_SHORT).show();
+        } else if (itemId == R.id.edit) {
+            ((INoteListFragment) requireActivity()).editNote(mNote);
         } else if (itemId == R.id.add_photo) {
             Toast.makeText(requireContext(), "todo add photo", Toast.LENGTH_SHORT).show();
         } else {

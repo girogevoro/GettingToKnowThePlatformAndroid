@@ -1,4 +1,4 @@
-package com.girogevoro.notesimple;
+package com.girogevoro.notesimple.UI.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -8,23 +8,23 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.DialogInterface;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
-import com.girogevoro.notesimple.repository.Note;
-import com.girogevoro.notesimple.repository.NoteRepositoryImpl;
+import com.girogevoro.notesimple.UI.fragment.AboutTheAppFragment;
+import com.girogevoro.notesimple.UI.fragment.EditNoteFragment;
+import com.girogevoro.notesimple.UI.fragment.INoteListFragment;
+import com.girogevoro.notesimple.UI.fragment.NoteInfoFragment;
+import com.girogevoro.notesimple.UI.fragment.NoteListFragment;
+import com.girogevoro.notesimple.R;
+import com.girogevoro.notesimple.domian.repository.Note;
+import com.girogevoro.notesimple.domian.repository.NoteRepositoryImpl;
 import com.google.android.material.navigation.NavigationView;
 
-import java.net.BindException;
 import java.util.Calendar;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements INoteListFragment {
 
@@ -33,10 +33,21 @@ public class MainActivity extends AppCompatActivity implements INoteListFragment
         c.set(2022, 3, 4);
         NoteRepositoryImpl.getInstance().add(new Note("note1", c.getTime(), "dest 1", Color.GREEN));
         c.set(2022, 3, 5);
-        NoteRepositoryImpl.getInstance().add(new Note("note2", c.getTime(), "dest 2", Color.YELLOW
-        ));
+        NoteRepositoryImpl.getInstance().add(new Note("note2", c.getTime(), "dest 2", Color.YELLOW));
         c.set(2022, 3, 6);
         NoteRepositoryImpl.getInstance().add(new Note("note3", c.getTime(), "dest 3", Color.MAGENTA));
+        c.set(2022, 3, 7);
+        NoteRepositoryImpl.getInstance().add(new Note("note4", c.getTime(), "dest 4", Color.GREEN));
+        c.set(2022, 3, 8);
+        NoteRepositoryImpl.getInstance().add(new Note("note5", c.getTime(), "dest 5", Color.YELLOW));
+        c.set(2022, 3, 9);
+        NoteRepositoryImpl.getInstance().add(new Note("note6", c.getTime(), "dest 6", Color.MAGENTA));
+        c.set(2022, 3, 10);
+        NoteRepositoryImpl.getInstance().add(new Note("note7", c.getTime(), "dest 7", Color.GREEN));
+        c.set(2022, 3, 11);
+        NoteRepositoryImpl.getInstance().add(new Note("note8", c.getTime(), "dest 8", Color.YELLOW));
+        c.set(2022, 3, 12);
+        NoteRepositoryImpl.getInstance().add(new Note("note9", c.getTime(), "dest 9", Color.MAGENTA));
     }
 
     @Override
@@ -59,6 +70,15 @@ public class MainActivity extends AppCompatActivity implements INoteListFragment
                 .beginTransaction()
                 .addToBackStack("")
                 .replace(R.id.list_info, NoteInfoFragment.newInstance(note))
+                .commit();
+    }
+
+    @Override
+    public void editNote(Note note) {
+        oneFrame()
+                .beginTransaction()
+                .addToBackStack("")
+                .replace(R.id.list_info, EditNoteFragment.newInstance(note))
                 .commit();
     }
 
