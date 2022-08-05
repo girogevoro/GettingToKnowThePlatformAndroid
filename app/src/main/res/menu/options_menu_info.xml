@@ -7,6 +7,10 @@
         android:id="@+id/add_photo"
         android:title="@string/menu_add_photo" />
     <item
+        android:id="@+id/edit"
+        android:title="@string/edit"
+        />
+    <item
         android:id="@+id/add_link"
         android:title="@string/menu_add_link" />
 </menu>

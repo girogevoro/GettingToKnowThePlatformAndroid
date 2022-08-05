@@ -1,8 +1,7 @@
-package com.girogevoro.notesimple;
+package com.girogevoro.notesimple.UI.dialogFragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,14 +12,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
-import com.girogevoro.notesimple.repository.Note;
+import com.girogevoro.notesimple.R;
+import com.girogevoro.notesimple.UI.fragment.INoteListFragment;
+import com.girogevoro.notesimple.domian.repository.Note;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -64,6 +63,7 @@ public class AddNoteDialogFragment extends DialogFragment {
         }
 
         mDate = view.findViewById(R.id.time);
+
         setData();
 
         mDate.setOnClickListener(v -> {

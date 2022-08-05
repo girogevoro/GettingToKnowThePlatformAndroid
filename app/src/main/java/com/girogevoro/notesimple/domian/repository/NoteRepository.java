@@ -1,4 +1,4 @@
-package com.girogevoro.notesimple.repository;
+package com.girogevoro.notesimple.domian.repository;
 
 import java.util.List;
 
