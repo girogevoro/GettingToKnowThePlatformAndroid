@@ -1,16 +1,18 @@
 package com.girogevoro.notesimple.domian;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.girogevoro.notesimple.R;
+import com.girogevoro.notesimple.UI.fragment.NoteListFragment;
 import com.girogevoro.notesimple.domian.repository.Note;
 import com.girogevoro.notesimple.domian.repository.NoteRepositoryImpl;
 import com.google.android.material.textview.MaterialTextView;
@@ -20,6 +22,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class AdapterNoteList extends RecyclerView.Adapter<AdapterNoteList.ViewHolder> {
+    private Fragment mFragment;
+
     public interface OnClickCard {
         void onClick(Note note);
     }
@@ -29,7 +33,8 @@ public class AdapterNoteList extends RecyclerView.Adapter<AdapterNoteList.ViewHo
     SimpleDateFormat mFormat;
     OnClickCard mOnClickCard;
 
-    public AdapterNoteList(List<Note> list) {
+    public AdapterNoteList(Fragment fragment, List<Note> list) {
+        mFragment = fragment;
         mFormat = new SimpleDateFormat("dd MM yyyy", Locale.getDefault());
         mList = list;
     }
@@ -91,11 +96,15 @@ public class AdapterNoteList extends RecyclerView.Adapter<AdapterNoteList.ViewHo
 
         void initPopupMenu(View view, Note note) {
             PopupMenu popupMenu = new PopupMenu(mCard.getContext(), view);
-            ((Activity) mCard.getContext()).getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+            Activity activity = (Activity) mCard.getContext();
+            activity.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+
             popupMenu.setOnMenuItemClickListener(menuItem -> {
                 if (menuItem.getItemId() == R.id.remove_note) {
-                    NoteRepositoryImpl.getInstance().getAll().remove(note);
-                    notifyDataSetChanged();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable(NoteListFragment.KEY_NODE, note);
+                    mFragment.getParentFragmentManager().setFragmentResult(NoteListFragment.REMOVE, bundle);
                     return true;
                 }
                 return false;

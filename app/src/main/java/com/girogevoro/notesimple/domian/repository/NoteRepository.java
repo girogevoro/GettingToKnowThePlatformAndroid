@@ -12,4 +12,6 @@ public interface NoteRepository {
     Note get(int index);
 
     List<Note> getAll();
+
+    int position(Note note);
 }

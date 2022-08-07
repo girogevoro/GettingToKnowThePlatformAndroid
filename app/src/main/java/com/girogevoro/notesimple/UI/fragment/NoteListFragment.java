@@ -1,18 +1,15 @@
 package com.girogevoro.notesimple.UI.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import androidx.appcompat.widget.PopupMenu;
-
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,7 +21,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import android.widget.Toast;
 
@@ -41,8 +37,18 @@ import com.girogevoro.notesimple.domian.repository.NoteRepositoryImpl;
  */
 public class NoteListFragment extends Fragment {
 
-    public static final String REFRESH_LIST = "refresh_list";
+    private static final int REMOVE_DURATION = 1000;
+    private static final int CHANGE_DURATION = 1000;
+    private static final int ADD_DURATION = 1000;
     private AdapterNoteList mAdapterNoteList;
+
+    public static final String ADD = "NoteListFragment_add";
+    public static final String REMOVE = "NoteListFragment_remove";
+    public static final String REPLACE = "NoteListFragment_replace";
+
+    public static final String KEY_NODE = "key_node";
+    private RecyclerView mRecyclerView;
+
 
     public NoteListFragment() {
         // Required empty public constructor
@@ -75,40 +81,82 @@ public class NoteListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initList(view.findViewById(R.id.list_notes));
+        mRecyclerView = view.findViewById(R.id.list_notes);
+        initList(mRecyclerView);
+
+        DefaultItemAnimator defaultItemAnimator = new DefaultItemAnimator();
+        defaultItemAnimator.setAddDuration(ADD_DURATION);
+        defaultItemAnimator.setChangeDuration(CHANGE_DURATION);
+        defaultItemAnimator.setRemoveDuration(REMOVE_DURATION);
+        mRecyclerView.setItemAnimator(defaultItemAnimator);
 
         view.findViewById(R.id.add_note).setOnClickListener(v -> {
-            Toast.makeText(requireContext(), "add new note", Toast.LENGTH_SHORT).show();
             AddNoteDialogFragment addNoteDialogFragment = AddNoteDialogFragment.newInstance(requireActivity());
             addNoteDialogFragment.show(getParentFragmentManager(), AddNoteDialogFragment.TAG);
         });
-        getParentFragmentManager().setFragmentResultListener(REFRESH_LIST, getViewLifecycleOwner(), new FragmentResultListener() {
+
+        setResultFragment();
+
+    }
+
+    private void setResultFragment() {
+        getParentFragmentManager().setFragmentResultListener(ADD, getViewLifecycleOwner(), new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                mAdapterNoteList.notifyDataSetChanged();
+                Note note = (Note) result.getParcelable(KEY_NODE);
+
+                NoteRepositoryImpl instance = NoteRepositoryImpl.getInstance();
+                instance.add(note);
+                int position = instance.length() - 1;
+                mAdapterNoteList.notifyItemInserted(position);
+                mRecyclerView.smoothScrollToPosition(position);
             }
         });
 
+
+        getParentFragmentManager().setFragmentResultListener(REMOVE, getViewLifecycleOwner(), new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                Note note = (Note) result.getParcelable(KEY_NODE);
+
+                NoteRepositoryImpl instance = NoteRepositoryImpl.getInstance();
+                int position = instance.position(note);
+                instance.remove(note);
+                mAdapterNoteList.notifyItemRemoved(position);
+            }
+        });
+
+        getParentFragmentManager().setFragmentResultListener(REPLACE, getViewLifecycleOwner(), new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                Note note = (Note) result.getParcelable(KEY_NODE);
+
+                NoteRepositoryImpl instance = NoteRepositoryImpl.getInstance();
+                instance.add(note);
+                int position = instance.position(note);
+                mAdapterNoteList.notifyItemChanged(position);
+                mRecyclerView.smoothScrollToPosition(position);
+            }
+
+        });
     }
 
     private void initList(RecyclerView recyclerView) {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
         mAdapterNoteList = new AdapterNoteList(
-                NoteRepositoryImpl.getInstance().getAll());
+                this, NoteRepositoryImpl.getInstance().getAll());
 
         mAdapterNoteList.setOnClickCard(note -> ((INoteListFragment) requireActivity()).setNote(note));
 
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(mAdapterNoteList);
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(requireContext(),LinearLayoutManager.VERTICAL);
-        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.ic_divider));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL);
+        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_divider));
         recyclerView.addItemDecoration(dividerItemDecoration);
 
     }
-
-
 
 
     @Override

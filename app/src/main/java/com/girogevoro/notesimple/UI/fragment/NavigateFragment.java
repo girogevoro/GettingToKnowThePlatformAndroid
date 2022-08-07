@@ -57,6 +57,12 @@ public class NavigateFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.remove_note).setOnClickListener(v -> {
             Toast.makeText(requireContext(), "Remove note", Toast.LENGTH_SHORT).show();
+
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(NoteListFragment.KEY_NODE, mNote);
+
+            getParentFragmentManager().setFragmentResult(NoteListFragment.REMOVE, bundle);
+            getParentFragmentManager().popBackStack();
         });
         view.findViewById(R.id.edit_note).setOnClickListener(v -> {
             ((INoteListFragment) requireActivity()).editNote(mNote);
