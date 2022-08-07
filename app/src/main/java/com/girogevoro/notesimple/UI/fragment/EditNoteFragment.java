@@ -154,6 +154,8 @@ public class EditNoteFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        getParentFragmentManager().setFragmentResult(NoteListFragment.REFRESH_LIST,null);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(NoteListFragment.KEY_NODE, mNote);
+        getParentFragmentManager().setFragmentResult(NoteListFragment.REPLACE, bundle);
     }
 }

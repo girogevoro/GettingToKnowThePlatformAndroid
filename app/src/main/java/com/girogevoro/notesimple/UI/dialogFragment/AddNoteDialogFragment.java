@@ -16,9 +16,11 @@ import androidx.fragment.app.DialogFragment;
 
 import com.girogevoro.notesimple.R;
 import com.girogevoro.notesimple.UI.fragment.INoteListFragment;
+import com.girogevoro.notesimple.UI.fragment.NoteListFragment;
 import com.girogevoro.notesimple.domian.repository.Note;
 
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -89,7 +91,12 @@ public class AddNoteDialogFragment extends DialogFragment {
         view.findViewById(R.id.button_ok).setOnClickListener(v -> {
             mNote.setName(((EditText) view.findViewById(R.id.add_note)).getText().toString());
             mNote.setDescription(((EditText) view.findViewById(R.id.description)).getText().toString());
-            ((INoteListFragment) requireActivity()).addNote(mNote);
+
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(NoteListFragment.KEY_NODE, mNote);
+
+            getParentFragmentManager().setFragmentResult(NoteListFragment.ADD, bundle);
+            //((INoteListFragment) requireActivity()).addNote(mNote);
             dismiss();
         });
 

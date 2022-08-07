@@ -64,8 +64,8 @@ public class NoteInfoFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initNote(view);
 
-        FragmentManager childFragmentManager = getChildFragmentManager();
-        childFragmentManager.beginTransaction()
+        FragmentManager parentFragmentManager = getParentFragmentManager();
+        parentFragmentManager.beginTransaction()
                 .replace(R.id.navigation, NavigateFragment.newInstance(mNote))
                 .commit();
 
@@ -104,6 +104,7 @@ public class NoteInfoFragment extends Fragment {
         String dd_mm_yyyy = new SimpleDateFormat(getString(R.string.format_date),
                 Locale.getDefault()).format(mNote.getDate());
         mDate.setText(dd_mm_yyyy);
+
     }
 
     @Override

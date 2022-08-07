@@ -21,18 +21,26 @@ public class NoteRepositoryImpl implements NoteRepository {
 
     @Override
     public void add(Note note) {
-//        for (int i = 0; i < mNoteList.size(); i++) {
-//            if (mNoteList.get(i).isEqual(note)) {
-//                mNoteList.set(i, note);
-//                return;
-//            }
-//        }
+        int pos = findPosition(note);
+        if (pos != -1) {
+            mNoteList.set(pos, note);
+            return;
+        }
         mNoteList.add(note);
+    }
+
+    private int findPosition(Note note) {
+        for (int i = 0; i < mNoteList.size(); i++) {
+            if (mNoteList.get(i).isEqual(note)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
     public void remove(Note note) {
-        mNoteList.remove(note);
+        mNoteList.remove(findPosition(note));
     }
 
     @Override
@@ -48,5 +56,11 @@ public class NoteRepositoryImpl implements NoteRepository {
     @Override
     public List<Note> getAll() {
         return mNoteList;
+    }
+
+    @Override
+    public int position(Note note) {
+        return findPosition(note);
+
     }
 }
