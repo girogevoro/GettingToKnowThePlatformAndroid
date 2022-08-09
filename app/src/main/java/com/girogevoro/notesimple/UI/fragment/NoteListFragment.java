@@ -101,7 +101,7 @@ public class NoteListFragment extends Fragment {
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 Note note = (Note) result.getParcelable(KEY_NODE);
 
-                NoteRepositoryImpl instance = NoteRepositoryImpl.getInstance();
+                NoteRepositoryImpl instance = NoteRepositoryImpl.getInstance(requireContext());
                 instance.add(note);
                 int position = instance.length() - 1;
                 mAdapterNoteList.notifyItemInserted(position);
@@ -115,7 +115,7 @@ public class NoteListFragment extends Fragment {
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 Note note = (Note) result.getParcelable(KEY_NODE);
 
-                NoteRepositoryImpl instance = NoteRepositoryImpl.getInstance();
+                NoteRepositoryImpl instance = NoteRepositoryImpl.getInstance(requireContext());
                 int position = instance.position(note);
                 instance.remove(note);
                 mAdapterNoteList.notifyItemRemoved(position);
@@ -127,7 +127,7 @@ public class NoteListFragment extends Fragment {
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 Note note = (Note) result.getParcelable(KEY_NODE);
 
-                NoteRepositoryImpl instance = NoteRepositoryImpl.getInstance();
+                NoteRepositoryImpl instance = NoteRepositoryImpl.getInstance(requireContext());
                 instance.add(note);
                 int position = instance.position(note);
                 mAdapterNoteList.notifyItemChanged(position);
@@ -141,7 +141,7 @@ public class NoteListFragment extends Fragment {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
         mAdapterNoteList = new AdapterNoteList(
-                this, NoteRepositoryImpl.getInstance().getAll());
+                this, NoteRepositoryImpl.getInstance(requireContext()).getAll());
 
         mAdapterNoteList.setOnClickCard(note -> ((INoteListFragment) requireActivity()).setNote(note));
 
