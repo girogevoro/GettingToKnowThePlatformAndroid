@@ -28,28 +28,6 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements INoteListFragment {
 
-    static {
-        Calendar c = Calendar.getInstance();
-        c.set(2022, 3, 4);
-        NoteRepositoryImpl.getInstance().add(new Note("note1", c.getTime(), "dest 1", Color.GREEN));
-        c.set(2022, 3, 5);
-        NoteRepositoryImpl.getInstance().add(new Note("note2", c.getTime(), "dest 2", Color.YELLOW));
-        c.set(2022, 3, 6);
-        NoteRepositoryImpl.getInstance().add(new Note("note3", c.getTime(), "dest 3", Color.MAGENTA));
-        c.set(2022, 3, 7);
-        NoteRepositoryImpl.getInstance().add(new Note("note4", c.getTime(), "dest 4", Color.GREEN));
-        c.set(2022, 3, 8);
-        NoteRepositoryImpl.getInstance().add(new Note("note5", c.getTime(), "dest 5", Color.YELLOW));
-        c.set(2022, 3, 9);
-        NoteRepositoryImpl.getInstance().add(new Note("note6", c.getTime(), "dest 6", Color.MAGENTA));
-        c.set(2022, 3, 10);
-        NoteRepositoryImpl.getInstance().add(new Note("note7", c.getTime(), "dest 7", Color.GREEN));
-        c.set(2022, 3, 11);
-        NoteRepositoryImpl.getInstance().add(new Note("note8", c.getTime(), "dest 8", Color.YELLOW));
-        c.set(2022, 3, 12);
-        NoteRepositoryImpl.getInstance().add(new Note("note9", c.getTime(), "dest 9", Color.MAGENTA));
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements INoteListFragment
 
     @Override
     public void addNote(Note note) {
-         NoteRepositoryImpl.getInstance().add(note);
+         NoteRepositoryImpl.getInstance(this).add(note);
          recreate();
     }
 
