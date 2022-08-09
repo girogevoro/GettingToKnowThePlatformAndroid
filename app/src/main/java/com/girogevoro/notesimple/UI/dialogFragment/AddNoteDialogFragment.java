@@ -20,7 +20,6 @@ import com.girogevoro.notesimple.UI.fragment.NoteListFragment;
 import com.girogevoro.notesimple.domian.repository.Note;
 
 import java.text.SimpleDateFormat;
-import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;

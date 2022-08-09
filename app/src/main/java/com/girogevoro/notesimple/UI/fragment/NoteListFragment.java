@@ -2,10 +2,16 @@ package com.girogevoro.notesimple.UI.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
@@ -14,18 +20,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-
-import android.widget.Toast;
-
-import com.girogevoro.notesimple.UI.dialogFragment.AddNoteDialogFragment;
 import com.girogevoro.notesimple.R;
+import com.girogevoro.notesimple.UI.dialogFragment.AddNoteDialogFragment;
 import com.girogevoro.notesimple.domian.AdapterNoteList;
 import com.girogevoro.notesimple.domian.repository.Note;
 import com.girogevoro.notesimple.domian.repository.NoteRepositoryImpl;

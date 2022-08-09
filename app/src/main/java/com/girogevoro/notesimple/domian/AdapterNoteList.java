@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.girogevoro.notesimple.R;
 import com.girogevoro.notesimple.UI.fragment.NoteListFragment;
 import com.girogevoro.notesimple.domian.repository.Note;
-import com.girogevoro.notesimple.domian.repository.NoteRepositoryImpl;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.text.SimpleDateFormat;

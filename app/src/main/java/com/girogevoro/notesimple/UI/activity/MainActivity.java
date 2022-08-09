@@ -1,12 +1,5 @@
 package com.girogevoro.notesimple.UI.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
-
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,12 +7,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+
+import com.girogevoro.notesimple.R;
 import com.girogevoro.notesimple.UI.fragment.AboutTheAppFragment;
 import com.girogevoro.notesimple.UI.fragment.EditNoteFragment;
 import com.girogevoro.notesimple.UI.fragment.INoteListFragment;
 import com.girogevoro.notesimple.UI.fragment.NoteInfoFragment;
 import com.girogevoro.notesimple.UI.fragment.NoteListFragment;
-import com.girogevoro.notesimple.R;
 import com.girogevoro.notesimple.domian.repository.Note;
 import com.girogevoro.notesimple.domian.repository.NoteRepositoryImpl;
 import com.google.android.material.navigation.NavigationView;
