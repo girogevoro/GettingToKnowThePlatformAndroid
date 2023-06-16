@@ -3,6 +3,7 @@ package com.girogevoro.model;
 public class CalculatorOperations implements CalculatorModel {
     @Override
     public double add(double arg1, double arg2) {
+
         return arg1 + arg2;
     }
 

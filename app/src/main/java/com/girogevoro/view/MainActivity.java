@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +19,6 @@ import com.girogevoro.presenter.CalculatorPresenter;
 import com.girogevoro.repository.Theme;
 import com.girogevoro.repository.ThemesRepositoryImpl;
 
-import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -93,21 +91,21 @@ public class MainActivity extends AppCompatActivity implements CalculatorView {
         initMapButtonCalculator(map);
 
         View.OnClickListener onClickDigital = view -> mOnClickButtonListener.click(
-                new PressedButton(
+                new PressedButtonImpl(
                         ((ButtonCalculator) map.get(view.getId())),
                         TypeButtonCalculator.DIGITAL));
 
         View.OnClickListener onClickOperation = view -> mOnClickButtonListener.click(
-                new PressedButton(
+                new PressedButtonImpl(
                         ((ButtonCalculator) map.get(view.getId())),
                         TypeButtonCalculator.OPERATION));
         View.OnClickListener onClickSing = view -> mOnClickButtonListener.click(
-                new PressedButton(
+                new PressedButtonImpl(
                         ((ButtonCalculator) map.get(view.getId())),
                         TypeButtonCalculator.SING));
 
         View.OnClickListener onClickDot = view -> mOnClickButtonListener.click(
-                new PressedButton(
+                new PressedButtonImpl(
                         ((ButtonCalculator) map.get(view.getId())),
                         TypeButtonCalculator.DOT));
 

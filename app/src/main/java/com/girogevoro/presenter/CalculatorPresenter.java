@@ -9,6 +9,7 @@ import com.girogevoro.view.ButtonCalculator;
 import com.girogevoro.view.CalculatorView;
 import com.girogevoro.view.OnClickButtonListener;
 import com.girogevoro.view.PressedButton;
+import com.girogevoro.view.PressedButtonImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -139,7 +140,7 @@ public class CalculatorPresenter implements OnClickButtonListener {
                 mCalculatorView.showResult(arg2);
                 break;
             case DOT:
-                Log.d("viewCalculator", "click: dot " + pressedButton.getButtonCalculator());
+//                Log.d("viewCalculator", "click: dot " + pressedButton.getButtonCalculator());
                 isDot = true;
                 break;
             default:
