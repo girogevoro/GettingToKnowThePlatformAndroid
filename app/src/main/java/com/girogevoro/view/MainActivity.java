@@ -28,6 +28,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity implements CalculatorView {
 
     private static final String CALCULATOR_PRESENTER = "CalculatorPresenter";
+    private static final String DATA = "data";
     private CalculatorPresenter mCalculatorPresenter;
     private CalculatorModel mCalculatorModel;
     private OnClickButtonListener mOnClickButtonListener;
@@ -52,6 +53,12 @@ public class MainActivity extends AppCompatActivity implements CalculatorView {
 
         initButtonTheme();
 
+        Intent intent = getIntent();
+        if (intent != null) {
+            if (intent.hasExtra(DATA)) {
+                mDisplay.setText(intent.getStringExtra(DATA));
+            }
+        }
 
     }
 
@@ -60,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements CalculatorView {
         ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
-                if(result.getResultCode()== Activity.RESULT_OK){
+                if (result.getResultCode() == Activity.RESULT_OK) {
                     Intent data = result.getData();
                     Theme theme = (Theme) data.getSerializableExtra(SettingActivity.NEW_THEME);
                     ThemesRepositoryImpl.getInstance(MainActivity.this).setNow(theme);
